@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter');
+html,body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: 'Architects Daughter', cursive;
+}
+.searchBar{
+    width: 100%;
+    display: block;
+    height: 100px;
+    position: relative;
+}
+.searchBar input#search{
+  width: 300px;
+  height: 40px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top:0;
+  bottom: 0;
+  margin: auto;
+  color: #2483c5;  
+  border: 2px solid #2483c5;    
+  border-radius: 25px;    
+  padding: 5px 5px 5px 20px ;    
+  outline: none;    
+}
+
+.gallery{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: auto;
+}
+.photo {
+  background: white;
+  width: 23%;
+/*  margin: .5%;    */
+}
+.dynamic-grid {
+  position: relative;
+  display: none;
+}
+.dynamic-grid.angular-grid {
+  display: block;
+}
+.photo {
+  position: absolute;
+  list-style: none;
+  background: #ffffff;;
+  box-sizing: border-box;
+  -webkit-transition: all 400ms ease;
+  transition: all 400ms ease;
+  overflow: hidden;
+  border-radius: 10px;
+}
+.photo.ng-leave {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+}
+.photo.ng-leave.ng-leave-active {
+  -webkit-transform: scale(0.5);
+  transform: scale(0.5);
+  opacity: 0;
+}
+.photo.ng-enter {
+  -webkit-transition: all ease 400ms;
+  transition: all ease 400ms;
+  -webkit-transition-delay: 500ms;
+  transition-delay: 500ms;
+  -webkit-transform: scale(0.5);
+   transform: scale(0.5);
+  opacity: 0;
+}
+.photo.ng-enter.ng-enter-active {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.photo .img {
+    width  : 100%;
+    height : 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.photo .overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: none;
+    cursor: pointer;
+}
+.photo .overlay .title{
+    margin: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 30px;
+    width: 100%;
+    font-size: 15px;
+    color: #fff;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    white-space: normal;
+    overflow: hidden;
+    text-align: center;
+   background-color: rgba(0,0,0,.5);
+ 
+}
+.photo:hover .overlay{
+    display: block;
+}
+.popup-backdrop{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    top:0;
+}
+.close-popup{
+    position: fixed;
+    display: block;
+    top: 0;
+    right: 0;
+    height: 50px;
+    width: 50px;
+}
+.close-popup a{
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ffffff;
+    z-index: 2;
+    line-height: 50px;
+}
+.popup{
+    width: 400px;
+    max-width: 400px;
+    height: 340px;
+    background-color: #ffffff;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.popup h1{
+    margin: 0;
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    font-size: 25px;
+    color: #000;
+    line-height: 40px;
+}
+.popup .thumb{
+    width: 100px;
+    height: 100px;
+    margin: 0 10px;
+    background-color: #dddddd;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    border: 1px solid #000;
+}
+.popup .desc{
+    display: inline-block;
+    width: 250px;
+    height: 200px;
+    font-size: 15px;
+    padding: 10px;
+    overflow: auto;
+}
+.popup .tags{
+    margin-top: 10px;
+    width: 100%;
+    position: relative;
+    height: 80px;
+    overflow: auto;
+    padding: 5px;
+    border-top: 1px solid #ddd;
+}
+.popup .tags .tag {
+  background-color: #cdf253;
+  border-radius: 3px 0 0 3px;
+  color: #999;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  -webkit-transition: color 0.2s;
+}
+
+.tag::before {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.25);
+  content: '';
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+
+.tag::after {
+  background: #fff;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #cdf253;
+  border-top: 13px solid transparent;
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+
+.tag:hover {
+  background-color: crimson;
+  color: white;
+}
+
+.tag:hover::after {
+   border-left-color: crimson; 
+}
