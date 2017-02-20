@@ -1,9 +1,24 @@
 (function(){
-    angular.module('planinxyz',['angularGrid','ngSanitize','angular-loading-bar', 'ngAnimate'])
+    angular.module('planinxyz',['ui.router','angularGrid','ngSanitize','angular-loading-bar', 'ngAnimate'])
     .controller('galleryController', galleryController)
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
     }])
+    .config(function($stateProvider,$urlRouterProvider) {
+          
+          $stateProvider
+              .state('gallery',{
+            url: '/gallery',
+              controller:'galleryController',
+              controllerAs:'vm',
+            templateUrl: 'views/gallery.html'
+          })
+          .state('notes',{
+            url: '/notes',
+            templateUrl: 'views/notes.html'
+          });
+          $urlRouterProvider.otherwise('/gallery');
+        })
     .filter('trustedURL', ['$sce',function($sce) { return $sce.trustAsHtml; }])
     .directive('autoresize', ['$window',function($window) {
         return {
@@ -44,10 +59,14 @@
            }    
         vm.selectedPhoto = {};
         vm.count = 0;
+        vm.per_page = 24;
         vm.showDetails = false;
         vm.getPhotos = function(){
-            vm.count++;
-            var photos = $http.get('https://api.dribbble.com/v1/shots/?per_page=24&page='+vm.count+'&access_token=3df6bcfc60b54b131ac04f132af615e60b0bd0b1cadca89a4761cd5d125d608f');
+            vm.count++ ;
+            if($window.innerWidth < 480){
+                vm.per_page = 36;
+            }
+            var photos = $http.get('https://api.dribbble.com/v1/shots/?per_page='+vm.per_page+'&page='+vm.count+'&access_token=3df6bcfc60b54b131ac04f132af615e60b0bd0b1cadca89a4761cd5d125d608f');
             photos.then(function(response){
                 var tempPhotos = angular.copy(vm.photos);
                 tempPhotos = tempPhotos.concat(response.data);
@@ -82,8 +101,12 @@
                 }
             });
         $window.addEventListener("resize", function (event) {
+                vm.photos = [];
+                vm.original = [];
                 vm.photoWidth = $window.innerWidth > 480 ? .25 * $window.innerWidth : .33 * $window.innerWidth;
+                vm.getPhotos();
                 angularGridInstance.photos.refresh();
+                
             });
         
     }

@@ -1,0 +1,32 @@
+<div class="searchBar">
+        <input type="search" id="search" ng-model="vm.searchPhoto" placeholder="Search by title..." />
+    </div>
+    <div ng-init="vm.getPhotos()" class="gallery dynamic-grid" ag-grid-width="vm.photoWidth" ag-gutter-size="0" angular-grid="vm.photos" ag-id="photos" ag-infinite-scroll="vm.getPhotos()">
+          <div ng-click="vm.showMeDetails(photo)" class="photo" autoresize ng-repeat="photo in vm.photos">
+            <div class="img" style="background-image: url({{::photo.images.normal}});"></div>
+            <div class="overlay">
+                <h1 class="title">
+                    {{::photo.title}}
+                </h1>  
+            </div>  
+          </div>
+    </div>
+    <div ng-show="vm.showDetails" class="popup-backdrop" ng-click="vm.showDetails = false;">
+        <div class="close-popup">
+            <a ng-click="vm.showDetails = false;">
+                x
+            </a>
+        </div>
+        <div class="popup" ng-click="vm.showDetails = true;">
+            <h1>{{vm.selectedPhoto.title}}</h1>
+            <div class="thumb" style="background-image:url('{{vm.selectedPhoto.images.teaser}}')">
+                
+            </div>
+            <div class="desc" ng-bind-html="vm.selectedPhoto.description">
+                
+            </div>
+            <div class="tags">
+                <span class="tag" ng-repeat="tag in vm.selectedPhoto.tags">{{tag}}</span>
+            </div>
+        </div>   
+    </div>
